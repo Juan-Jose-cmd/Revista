@@ -3,8 +3,11 @@ import { config, fields, collection } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'local', // para desarrollo local
-    // kind: 'github', // cuando quieras publicar desde el CMS en producción
+    kind: 'github',
+    repo: {
+      owner: 'Juan-Jose-cmd', // Tu usuario u organización
+      name: 'Revista',     // El nombre del repositorio
+    },
   },
   collections: {
     coyuntura: collection({
