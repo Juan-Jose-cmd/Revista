@@ -1,0 +1,99 @@
+---
+// src/pages/actividades/index.astro
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Evento from '../../components/Evento.astro';
+import CTA from '../../components/CTA.astro';
+
+const eventos = await getCollection('actividades');
+
+const hoy = new Date();
+
+const proximos = eventos
+  .filter((e) => e.data.fecha.getTime() >= hoy.getTime())
+  .sort((a, b) => a.data.fecha.getTime() - b.data.fecha.getTime());
+
+const pasados = eventos
+  .filter((e) => e.data.fecha.getTime() < hoy.getTime())
+  .sort((a, b) => b.data.fecha.getTime() - a.data.fecha.getTime());
+
+const permanentes = [
+  {
+    etiqueta: 'Todos los martes',
+    titulo: 'Mateada de discusión',
+    texto: 'Encuentro informal para charlar de coyuntura, traer dudas y conocernos. Sin exposiciones, sin oradores.',
+  },
+  {
+    etiqueta: 'Todos los jueves',
+    etiquetaColor: 'roja' as const,
+    titulo: 'Comisión de formación',
+    texto: 'Preparación de materiales, corrección de cuadernos y organización de los talleres abiertos.',
+  },
+  {
+    etiqueta: 'Sábados alternos',
+    etiquetaColor: 'clara' as const,
+    titulo: 'Trabajo en el barrio',
+    texto: 'Volanteada, visita a ferias y contacto directo con trabajadores y vecinos de la zona.',
+  },
+];
+
+const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+const formatearDia = (fecha: Date) => String(fecha.getDate()).padStart(2, '0');
+const formatearMes = (fecha: Date) => meses[fecha.getMonth()];
+---
+
+<Base title="Actividades — Patriotismo Socialista">
+  <PageHero
+    titulo="Actividades"
+    migaActual="Actividades"
+    bajada="Plenarios, talleres, mateadas y trabajo territorial. La militancia se construye en la calle y en el barrio, no sólo en los papeles."
+  />
+
+  <div class="contenido">
+    <section class="bloque">
+      <div class="bloque-cabecera">
+        <h2>Próximas actividades</h2>
+        <p>Agendá y sumate. Todas las actividades son abiertas y gratuitas.</p>
+      </div>
+
+      {proximos.length > 0 ? (
+        <ul class="eventos">
+          {proximos.map((evento) => (
+            <Evento
+              dia={formatearDia(evento.data.fecha)}
+              mes={formatearMes(evento.data.fecha)}
+              etiqueta={evento.data.etiqueta}
+              etiquetaColor={
+                evento.data.etiqueta === 'plenario'
+                  ? 'roja'
+                  : evento.data.etiqueta === 'territorio'
+                  ? 'clara'
+                  : undefined
+              }
+              titulo={evento.data.titulo}
+              descripcion={evento.body ?? ''}
+              lugar={evento.data.lugar}
+              hora={evento.data.hora}
+              entrada={evento.data.entrada ?? 'Entrada libre'}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p style="color:var(--texto-suave);">
+          No hay actividades programadas por ahora. Volvé pronto.
+        </p>
+      )}
+    </section>
+
+    <section class="bloque">
+      <CTA
+        titulo="Sumate al movimiento"
+        texto="No hace falta carnet ni experiencia. Alcanza con querer una Argentina soberana y estar dispuesto a construirla con otros."
+        accionPrimaria={{ href: 'mailto:juanjopereyra0@gmail.com', label: 'Quiero sumarme' }}
+        accionSecundaria={{ href: 'https://drive.google.com/drive/folders/1IMNZDAj5eHYmF1y0DaDOQxXxakDhROgc?usp=sharing', label: 'Formarme' }}
+      />
+    </section>
+  </div>
+</Base>

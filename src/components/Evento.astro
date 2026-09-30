@@ -1,0 +1,40 @@
+---
+// src/components/Evento.astro
+interface Props {
+  dia: string;
+  mes: string;
+  etiqueta: string;
+  etiquetaColor?: 'roja' | 'clara';
+  titulo: string;
+  descripcion: string;
+  lugar: string;
+  hora: string;
+  entrada: string;
+}
+
+const {
+  dia, mes, etiqueta, etiquetaColor,
+  titulo, descripcion, lugar, hora, entrada,
+} = Astro.props;
+
+const claseEtiqueta = ['etiqueta', etiquetaColor && `etiqueta--${etiquetaColor}`]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<li class="evento">
+  <div class="evento-fecha">
+    <span class="dia">{dia}</span>
+    <span class="mes">{mes}</span>
+  </div>
+  <div class="evento-cuerpo">
+    <span class={claseEtiqueta}>{etiqueta}</span>
+    <h3>{titulo}</h3>
+    <p>{descripcion}</p>
+    <ul class="evento-datos">
+      <li>📍 {lugar}</li>
+      <li>🕗 {hora}</li>
+      <li>🎟 {entrada}</li>
+    </ul>
+  </div>
+</li>

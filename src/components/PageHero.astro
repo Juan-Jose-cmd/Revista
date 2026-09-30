@@ -1,0 +1,22 @@
+---
+// src/components/PageHero.astro
+interface Props {
+  titulo: string;
+  bajada?: string;
+  migaActual: string;
+}
+
+const { titulo, bajada, migaActual } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ubicación">
+      <a href="/">Inicio</a>
+      <span class="separador" aria-hidden="true">/</span>
+      <span>{migaActual}</span>
+    </nav>
+    <h1>{titulo}</h1>
+    {bajada && <p class="bajada">{bajada}</p>}
+  </div>
+</section>

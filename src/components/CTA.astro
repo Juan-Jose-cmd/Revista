@@ -1,0 +1,26 @@
+---
+// src/components/CTA.astro
+interface Props {
+  titulo: string;
+  texto: string;
+  accionPrimaria: { href: string; label: string };
+  accionSecundaria?: { href: string; label: string };
+}
+
+const { titulo, texto, accionPrimaria, accionSecundaria } = Astro.props;
+---
+
+<div class="cta">
+  <h2>{titulo}</h2>
+  <p>{texto}</p>
+  <div class="cta-acciones">
+    <a href={accionPrimaria.href} class="boton boton--rojo">
+      {accionPrimaria.label}
+    </a>
+    {accionSecundaria && (
+      <a href={accionSecundaria.href} class="boton boton--fantasma">
+        {accionSecundaria.label}
+      </a>
+    )}
+  </div>
+</div>

@@ -1,0 +1,34 @@
+---
+// src/components/Tarjeta.astro
+interface Props {
+  etiqueta?: string;
+  etiquetaColor?: 'roja' | 'clara';
+  titulo: string;
+  meta?: string;
+  descripcion: string;
+  enlace?: string;
+  enlaceTexto?: string;
+}
+
+const {
+  etiqueta,
+  etiquetaColor,
+  titulo,
+  meta,
+  descripcion,
+  enlace,
+  enlaceTexto = 'Leer más',
+} = Astro.props;
+
+const claseEtiqueta = ['etiqueta', etiquetaColor && `etiqueta--${etiquetaColor}`]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<article class="tarjeta">
+  {etiqueta && <span class={claseEtiqueta}>{etiqueta}</span>}
+  <h3>{titulo}</h3>
+  {meta && <p class="meta"><span>{meta}</span></p>}
+  <p>{descripcion}</p>
+  {enlace && <a href={enlace} class="enlace-flecha">{enlaceTexto}</a>}
+</article>

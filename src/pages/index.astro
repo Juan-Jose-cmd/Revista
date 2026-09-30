@@ -1,17 +1,46 @@
 ---
-
+// src/pages/index.astro
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Patriotismo Socialista — Inicio">
+  <section class="home-hero">
+    <div>
+      <h1>Espacio de militancia Socialismo Nacional</h1>
+    </div>
+  </section>
+
+  <section class="home-contenido">
+    <div>
+      <h2>Tierra, Puerto, Industria y Distribución</h2>
+    </div>
+
+    <div>
+      <h3>
+        Buscamos romper con los dogmas impuestos por los partidos burgueses
+        argentinos y avanzar hacia una nación con industria nacional, puerto
+        propio y <span>SOBERANÍA DE SUS TIERRAS!!</span>
+      </h3>
+    </div>
+
+    <div>
+      <p>
+        Sumate a nosotros y juntos hablemos de hacer una Argentina soberana,
+        una ARGENTINA GRANDE.
+      </p>
+      <p>
+        Como agrupación planteamos en primera instancia recuperar la soberanía
+        de nuestros recursos, controlar la exportación e importación, fomentar
+        la industria nacional y distribuir la riqueza equitativamente.
+      </p>
+    </div>
+
+    <div>
+      <p>
+        Levantemos la voz juntos y luchemos por nuestro presente y por el
+        futuro de aquellos que nos siguen. Luchemos por nuestros padres,
+        nuestros hermanos y abuelos. Luchemos por Argentina.
+      </p>
+    </div>
+  </section>
+</Base>

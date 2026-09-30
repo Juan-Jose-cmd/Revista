@@ -1,0 +1,88 @@
+---
+// src/pages/coyuntura/index.astro
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Tarjeta from '../../components/Tarjeta.astro';
+import CTA from '../../components/CTA.astro';
+
+const articulos = await getCollection('coyuntura');
+
+const ordenados = articulos.sort(
+  (a, b) => b.data.fecha.getTime() - a.data.fecha.getTime()
+);
+
+const [destacado, ...resto] = ordenados;
+
+const formatearFecha = (fecha: Date) =>
+  fecha.toLocaleDateString('es-AR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+---
+
+<Base title="Coyuntura — Patriotismo Socialista">
+  <PageHero
+    titulo="Coyuntura"
+    migaActual="Coyuntura"
+    bajada="Lectura crítica de la realidad argentina. Análisis sobre economía, soberanía, trabajo y política nacional desde la Izquierda Nacional."
+  />
+
+  <div class="contenido">
+    {destacado && (
+      <article class="destacado">
+        <span class="etiqueta etiqueta--roja">Análisis destacado</span>
+        <h2>{destacado.data.titulo}</h2>
+        <p class="meta">
+          <span>{formatearFecha(destacado.data.fecha)}</span>
+          <span>{destacado.data.categoria}</span>
+        </p>
+        <p>{destacado.data.resumen}</p>
+        <a href={`/coyuntura/${destacado.id}`} class="enlace-flecha">
+          Leer el análisis completo
+        </a>
+      </article>
+    )}
+
+    <section class="bloque">
+      <div class="bloque-cabecera">
+        <h2>Últimos análisis</h2>
+        <p>
+          Publicaciones periódicas del movimiento sobre los temas que
+          atraviesan la Argentina de hoy.
+        </p>
+      </div>
+
+      <div class="grilla grilla--ancha">
+        {resto.map((articulo) => (
+          <Tarjeta
+            etiqueta={articulo.data.categoria}
+            etiquetaColor={articulo.data.categoria === 'tierra' ? 'roja' : undefined}
+            titulo={articulo.data.titulo}
+            meta={formatearFecha(articulo.data.fecha)}
+            descripcion={articulo.data.resumen}
+            enlace={`/coyuntura/${articulo.id}`}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="bloque">
+      <blockquote class="cita">
+        Un país que no controla su puerto, su tierra y su industria
+        no discute política: sólo administra la dependencia.
+        <span class="cita-autor">— Documento fundacional del movimiento</span>
+      </blockquote>
+    </section>
+
+    <section class="bloque">
+      <CTA
+        titulo="¿Tenés algo para aportar?"
+        texto="La coyuntura se lee entre todos. Si tenés datos, análisis o una mirada sobre lo que pasa en tu territorio, escribinos."
+        accionPrimaria={{ href: '/actividades', label: 'Ver actividades' }}
+        accionSecundaria={{ href: '/teoria', label: 'Ir a teoría' }}
+      />
+    </section>
+  </div>
+</Base>

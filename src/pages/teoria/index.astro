@@ -1,0 +1,76 @@
+---
+// src/pages/teoria/index.astro
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Tarjeta from '../../components/Tarjeta.astro';
+import CTA from '../../components/CTA.astro';
+
+const cuadernos = await getCollection('teoria');
+
+const ordenados = cuadernos.sort((a, b) =>
+  a.data.numero.localeCompare(b.data.numero, undefined, { numeric: true })
+);
+
+const conceptos = [
+  { titulo: 'Izquierda Nacional', texto: 'Corriente que articula la lucha social con la cuestión nacional: no se puede liberar al pueblo sin liberar a la nación.' },
+  { titulo: 'Soberanía', texto: 'Capacidad real de decidir sobre los recursos, la producción, el comercio y el destino del país. No es un discurso: es poder.' },
+  { titulo: 'Renta diferencial', texto: 'Ganancia extraordinaria que captan los dueños de tierras fértiles sin producir más. Es la base material del poder terrateniente.' },
+  { titulo: 'Dependencia', texto: 'Situación estructural en la que las decisiones económicas del país se toman en función de intereses ajenos.' },
+  { titulo: 'Industria nacional', texto: 'Producción local con valor agregado, capital y tecnología propios. Condición necesaria para empleo de calidad.' },
+  { titulo: 'Distribución', texto: 'Reparto equitativo de la riqueza producida. Sin distribución, el crecimiento no llega al pueblo que lo genera.' },
+];
+---
+
+<Base title="Teoría — Patriotismo Socialista">
+  <PageHero
+    titulo="Teoría"
+    migaActual="Teoría"
+    bajada="Formación política y materiales de estudio. La Izquierda Nacional como herramienta para entender y transformar la realidad argentina."
+  />
+
+  <div class="contenido">
+    <section class="bloque">
+      <div class="bloque-cabecera">
+        <h2>Por qué estudiamos</h2>
+      </div>
+      <p style="max-width:70ch; color:var(--texto-suave);">
+        Sin teoría no hay estrategia, y sin estrategia no hay revolución
+        posible. No estudiamos por academicismo: estudiamos para entender
+        quién produce la riqueza, quién la concentra y qué fuerzas sociales
+        pueden disputar el poder real en la Argentina.
+      </p>
+
+      <blockquote class="cita">
+        La cuestión nacional no es un adorno del análisis: es el punto de
+        partida para entender la dependencia.
+        <span class="cita-autor">— Cuaderno de formación N°1</span>
+      </blockquote>
+    </section>
+
+    <section class="bloque">
+      <div class="bloque-cabecera">
+        <h2>Conceptos clave</h2>
+        <p>Las categorías que usamos todo el tiempo, explicadas en pocas líneas.</p>
+      </div>
+
+      <div class="conceptos">
+        {conceptos.map((c) => (
+          <div class="concepto">
+            <h3>{c.titulo}</h3>
+            <p>{c.texto}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="bloque">
+      <CTA
+        titulo="Formate con nosotros"
+        texto="Organizamos talleres de formación política abiertos y gratuitos. No hace falta experiencia previa, sólo ganas de entender."
+        accionPrimaria={{ href: '/actividades', label: 'Ver talleres' }}
+        accionSecundaria={{ href: 'https://drive.google.com/drive/folders/1IMNZDAj5eHYmF1y0DaDOQxXxakDhROgc?usp=sharing', label: 'Leer análisis' }}
+      />
+    </section>
+  </div>
+</Base>

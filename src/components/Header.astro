@@ -1,0 +1,28 @@
+---
+// src/components/Header.astro
+const path = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'Inicio' },
+  { href: '/coyuntura', label: 'Coyuntura' },
+  { href: '/teoria', label: 'Teoría' },
+  { href: '/actividades', label: 'Actividades' },
+];
+
+const esActivo = (href: string) => {
+  if (href === '/') return path === '/';
+  return path.startsWith(href);
+};
+---
+
+<header>
+  <div>
+    <ul>
+      {links.map(({ href, label }) => (
+        <li>
+          <a href={href} class={esActivo(href) ? 'activo' : ''}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>

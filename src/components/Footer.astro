@@ -1,0 +1,23 @@
+---
+// src/components/Footer.astro
+const redes = [
+  { href: '#', label: 'Instagram' },
+  { href: '#', label: 'Facebook' },
+  { href: '#', label: 'X' },
+  { href: '#', label: 'WhatsApp' },
+];
+---
+
+<footer>
+  <div>
+    <h3>Redes</h3>
+    <ul>
+      {redes.map(({ href, label }) => (
+        <li><a href={href}>{label}</a></li>
+      ))}
+    </ul>
+  </div>
+  <div>
+    <h3>Movimiento de Socialismo Nacionalista, todos los derechos reservados</h3>
+  </div>
+</footer>

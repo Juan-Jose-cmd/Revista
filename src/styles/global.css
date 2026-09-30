@@ -1,0 +1,400 @@
+/* ============================================================
+   PATRIOTISMO SOCIALISTA — Estilos globales
+   ============================================================ */
+
+:root {
+    --azul-noche:    #071629;
+    --azul-profundo: #0b2340;
+    --azul:          #16457f;
+    --azul-medio:    #1f5fa9;
+    --celeste:       #7fb2e5;
+    --blanco:        #f5f8fc;
+    --rojo:          #c8102e;
+    --rojo-oscuro:   #8c0a1f;
+
+    --texto:         #e8f0fa;
+    --texto-suave:   #b3c7e0;
+
+    --superficie:    rgba(255, 255, 255, .05);
+    --borde:         rgba(127, 178, 229, .22);
+
+    --radio:         16px;
+    --sombra:        0 18px 40px rgba(0, 0, 0, .45);
+    --ancho-max:     1120px;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1, h2, h3,
+p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+ul { list-style: none; }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* ---------- Cuerpo ---------- */
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--texto);
+
+    background-color: var(--azul-noche);
+    background-image:
+        radial-gradient(circle at 12% 0%,   rgba(31, 95, 169, .55), transparent 55%),
+        radial-gradient(circle at 88% 100%, rgba(200, 16, 46, .30), transparent 55%),
+        linear-gradient(160deg, #0b1f3a 0%, #0b2340 45%, #061020 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+::selection {
+    background: var(--rojo);
+    color: #fff;
+}
+
+/* ---------- Header ---------- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(7, 22, 41, .85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        var(--azul-medio) 0 34%,
+        var(--blanco)     34% 66%,
+        var(--rojo)       66% 100%);
+}
+
+header > div {
+    max-width: var(--ancho-max);
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+header ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .25rem;
+}
+
+header a {
+    display: block;
+    padding: .95rem 1.15rem;
+    font-size: .92rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    box-shadow: inset 0 -3px 0 transparent;
+    transition: color .25s ease, background-color .25s ease, box-shadow .25s ease;
+}
+
+header a:hover,
+header a:focus-visible {
+    color: var(--blanco);
+    background: rgba(127, 178, 229, .12);
+    box-shadow: inset 0 -3px 0 var(--rojo);
+    outline: none;
+}
+
+/* Enlace activo */
+header a.activo {
+    color: var(--blanco);
+    background: rgba(127, 178, 229, .12);
+    box-shadow: inset 0 -3px 0 var(--rojo);
+}
+
+/* ---------- Portada de la HOME ---------- */
+.home-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72vh;
+    padding: 6rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--borde);
+}
+
+.home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        125deg,
+        rgba(127, 178, 229, .10) 0 40px,
+        rgba(245, 248, 252, .05) 40px 80px,
+        rgba(200, 16, 46, .10)   80px 120px
+    );
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 78%);
+            mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 78%);
+}
+
+.home-hero > div {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+}
+
+.home-hero h1 {
+    font-size: clamp(1.9rem, 5.5vw, 3.6rem);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: var(--blanco);
+    text-shadow: 0 6px 30px rgba(0, 0, 0, .6);
+}
+
+.home-hero > div::after {
+    content: "";
+    display: block;
+    width: 140px;
+    height: 8px;
+    margin: 2.25rem auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        var(--azul-medio) 0 33%,
+        var(--blanco)     33% 66%,
+        var(--rojo)       66% 100%);
+    box-shadow: 0 0 22px rgba(127, 178, 229, .55);
+}
+
+/* ---------- Contenido de la HOME ---------- */
+.home-contenido {
+    max-width: var(--ancho-max);
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 5.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.home-contenido > div:nth-child(1),
+.home-contenido > div:nth-child(2) {
+    grid-column: 1 / -1;
+}
+
+.home-contenido h2 {
+    position: relative;
+    padding-bottom: 1.25rem;
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--blanco);
+}
+
+.home-contenido h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 220px;
+    max-width: 70%;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--celeste), var(--blanco), var(--rojo));
+}
+
+.home-contenido h3 {
+    max-width: 62ch;
+    margin: 0 auto;
+    font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+    font-weight: 400;
+    line-height: 1.75;
+    text-align: center;
+    color: var(--texto-suave);
+}
+
+.home-contenido h3 span {
+    display: inline-block;
+    margin-top: .35rem;
+    padding: .15em .6em;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(200, 16, 46, .35);
+}
+
+.home-contenido > div:nth-child(3),
+.home-contenido > div:nth-child(4) {
+    padding: 1.75rem 1.6rem;
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-left: 4px solid var(--azul-medio);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: transform .3s ease, border-left-color .3s ease, background-color .3s ease;
+}
+
+.home-contenido > div:nth-child(4) {
+    border-left-color: var(--rojo);
+}
+
+.home-contenido > div:nth-child(3):hover,
+.home-contenido > div:nth-child(4):hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, .08);
+    border-left-color: var(--celeste);
+}
+
+.home-contenido p {
+    color: var(--texto-suave);
+}
+
+.home-contenido p + p {
+    margin-top: 1rem;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    padding: 3rem 1.5rem 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    align-items: center;
+    text-align: center;
+
+    background-color: #040d18;
+    background-image: linear-gradient(90deg,
+        var(--azul-medio) 0 33%,
+        var(--blanco)     33% 66%,
+        var(--rojo)       66% 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 4px;
+    background-position: top;
+}
+
+footer h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--celeste);
+}
+
+footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem;
+    margin-top: 1.1rem;
+}
+
+footer ul a {
+    display: inline-block;
+    padding: .5rem 1.15rem;
+    font-size: .88rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+    color: var(--texto-suave);
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    transition: background-color .25s ease, color .25s ease,
+                border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+footer ul a:hover,
+footer ul a:focus-visible {
+    color: #fff;
+    background: var(--rojo);
+    border-color: var(--rojo);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(200, 16, 46, .38);
+    outline: none;
+}
+
+footer > div:last-child h3 {
+    font-size: .85rem;
+    font-weight: 400;
+    letter-spacing: .04em;
+    text-transform: none;
+    color: var(--texto-suave);
+    opacity: .8;
+}
+
+/* ---------- Accesibilidad ---------- */
+a:focus-visible {
+    outline: 2px solid var(--celeste);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+    body {
+        font-size: 16px;
+        background-attachment: scroll;
+    }
+
+    header a {
+        padding: .7rem .8rem;
+        font-size: .8rem;
+        letter-spacing: .06em;
+    }
+
+    .home-hero {
+        min-height: 60vh;
+        padding: 4rem 1.25rem;
+    }
+
+    .home-contenido {
+        padding: 3rem 1.25rem 3.5rem;
+        gap: 1.5rem;
+    }
+
+    footer {
+        padding: 2.5rem 1.25rem 2rem;
+    }
+}
